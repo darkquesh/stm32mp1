@@ -1,3 +1,5 @@
+#Bash script to initialise STM32MP1 SDK
+
 #!/usr/bin/bash
 
 sudo -s
