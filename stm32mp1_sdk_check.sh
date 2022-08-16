@@ -1,6 +1,6 @@
 #Bash script to initialise STM32MP1 SDK
 
-#!/usr/bin/bash
+#!/usr/bin/sudo bash
 
 cd /home/STM32MPU_workspace/STM32MP1-Ecosystem-v4.0.0/Developer-Package
 
@@ -23,6 +23,8 @@ echo $CC --version $'\n'
 echo Checking that the SDK version is the expected one *4.0.1-openstlinux-5.15-yocto-kirkstone-mp1-v22.06.15*
 echo $OECORE_SDK_VERSION $'\n'
 
-echo DO NOT close this terminal until cross-compilation is done! 
+echo DO NOT close this terminal until cross-compilation is done!
+
+cd /home/STM32MPU_workspace/STM32MP1-Ecosystem-v4.0.0/Developer-Package/stm32mp1-openstlinux-22.06.15/sources/gtk_hello_world_example
 
 /bin/bash
