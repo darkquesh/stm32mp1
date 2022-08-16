@@ -1,0 +1,12 @@
+arm-ostl-linux-gnueabi-gcc -o gtk_hello_world gtk_hello_world.c `pkg-config --cflags gtk+-3.0` `pkg-config --libs gtk+-3.0` 
+
+arm-ostl-linux-gnueabi-gcc -I/home/STM32MPU_workspace/STM32MP1-Ecosystem-v4.0.0/Developer-Package/sysroots/cortexa7t2hf-neon-vfpv4-ostl-linux-gnueabi/usr/include -I./include -I/usr/include -o gtk_hello_world gtk_hello_world.c `pkg-config --cflags gtk+-3.0` `pkg-config --libs gtk+-3.0` 
+
+
+# No error
+
+arm-ostl-linux-gnueabi-gcc --sysroot=/home/STM32MPU_workspace/STM32MP1-Ecosystem-v4.0.0/Developer-Package/sysroots/cortexa7t2hf-neon-vfpv4-ostl-linux-gnueabi/ -o gtk_hello_world gtk_hello_world.c `pkg-config --cflags gtk+-3.0` `pkg-config --libs gtk+-3.0` -mfloat-abi=hard -mfpu=fpv4-sp-d16
+
+
+# Disable martian source logging when ethernet is connected:
+	echo 0 > /proc/sys/net/ipv4/conf/{all,default}/log_martians
