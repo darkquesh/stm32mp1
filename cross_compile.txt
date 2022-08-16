@@ -10,3 +10,7 @@ arm-ostl-linux-gnueabi-gcc --sysroot=/home/STM32MPU_workspace/STM32MP1-Ecosystem
 
 # Disable martian source logging when ethernet is connected:
 	echo 0 > /proc/sys/net/ipv4/conf/{all,default}/log_martians
+	
+# DO NOT run GTK application with root; instead use weston (local) as given below
+cd /usr/local/
+su -l weston -c "/usr/local/gtk_hello_world" 
