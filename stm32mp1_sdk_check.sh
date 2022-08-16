@@ -2,8 +2,6 @@
 
 #!/usr/bin/bash
 
-sudo -s
-
 cd /home/STM32MPU_workspace/STM32MP1-Ecosystem-v4.0.0/Developer-Package
 
 echo Inside the Developer-Package folder
