@@ -1,4 +1,4 @@
-# To start using bitbake you need to source the "oe-init-build-env" script located into poky/ directory. So you should do something like this every time using bitbake:
+### To start using bitbake you need to source the "oe-init-build-env" script located into poky/ directory. So you should do something like this every time using bitbake:
 
 cd ~/Projects/yocto
 source poky/oe-init-build-env build-mp1
@@ -24,7 +24,7 @@ rm -rf tmp
 
 
 
-# Create the final image for the SD card
+### Create the final image for the SD card
 
 cd ~/Projects/yocto/build-mp1/tmp/deploy/images/stm32mp1/scripts
 
@@ -73,5 +73,55 @@ deb [trusted=yes] http://packages.openstlinux.st.com kirkstone/updates armhf Pac
 
 APT::Architecture "${DPKG_ARCH}";
 
-##
+
+### Create custom layer and image
+
+# Enable the OpenEmbedded build environment
+
+cd ~/Projects/yocto
+source poky/oe-init-build-env build-mp1
+
+# Create a custom layer
+
+cd ~/Projects/yocto
+bitbake-layers create-layer meta-custom
+
+# Create custom image
+
+cd meta-custom
+mkdir -p recipes-core/images
+
+# Copy the core-image-minimal.bb recipe to use a starting point
+
+cp ../poky/meta/recipes-core/images/core-image-minimal.bb recipes-core/images/custom-image.bb
+vi recipes-core/images/custom-image.bb
+
+# Change the recipe to the following
+
+
+# Create the final custom image for the SD card
+
+cd ~/Projects/yocto/build-mp1/tmp/deploy/images/stm32mp1/scripts
+
+./create_sdcard_from_flashlayout.sh ../flashlayout_custom-image/extensible/FlashLayout_sdcard_stm32mp157f-dk2-extensible.tsv
+
+sudo dd if=../flashlayout_custom-image/extensible/../../FlashLayout_sdcard_stm32mp157f-dk2-extensible.raw of=/dev/mmcblk0 bs=8M conv=fdatasync status=progress oflag=direct
+
+
+## Enable peripherals like I2C
+
+cd ~/Projects/yocto/build-mp1/
+cp tmp/work-shared/stm32mp1/kernel-source/arch/arm/boot/dts/stm32mp157d-dk1.dts ~/Documents
+cd ~/Documents
+cp stm32mp157f-dk2.dts stm32mp157f-dk2.dts.orig
+vi stm32mp157f-dk2.dts
+
 git diff --no-index stm32mp157f-dk2.dts.orig stm32mp157f-dk2.dts > 0001-add-i2c5-userspace-dts.patch
+
+gedit 0001-add-i2c5-userspace-dts.patch
+
+# Change the file header so that it points to the correct file locations:
+
+--- a/arch/arm/boot/dts/stm32mp157f-dk2.dts
++++ b/arch/arm/boot/dts/stm32mp157f-dk2.dts
+
