@@ -1,0 +1,77 @@
+# To start using bitbake you need to source the "oe-init-build-env" script located into poky/ directory. So you should do something like this every time using bitbake:
+
+cd ~/Projects/yocto
+source poky/oe-init-build-env build-mp1
+cd build-mp1
+
+bitbake-layers show-layers
+
+bitbake -c menuconfig virtual/kernel
+
+bitbake core-image-minimal	# or one of the images here https://docs.yoctoproject.org/ref-manual/images.html
+
+# You may continue building the image without starting over by executing the following command
+
+bitbake -f core-image-minimal
+
+# If you want to start over 
+
+bitbake -c cleanall core-image-minimal
+
+# To clean out everything
+
+rm -rf tmp
+
+
+
+# Create the final image for the SD card
+
+cd ~/Projects/yocto/build-mp1/tmp/deploy/images/stm32mp1/scripts
+
+./create_sdcard_from_flashlayout.sh ../flashlayout_core-image-minimal/extensible/FlashLayout_sdcard_stm32mp157f-dk2-extensible.tsv
+
+# After unmounting the SD card
+
+sudo dd if=../flashlayout_core-image-minimal/extensible/../../FlashLayout_sdcard_stm32mp157f-dk2-extensible.raw of=/dev/mmcblk0 bs=8M conv=fdatasync status=progress oflag=direct
+
+## Voila!
+
+
+# Adding build tools (including GCC and Nano) to the Linux system
+
+Find the local.conf file (in .../yocto-labs/build/conf) and add these lines (doesn’t seem to matter where but the space before the package name seems to be important!):
+
+	IMAGE_INSTALL:append = " packagegroup-core-buildessential"
+	IMAGE_INSTALL:append = " nano"
+	IMAGE_INSTALL:append = " apt"
+
+The first line will append the typical GCC build tools. The second line will add the Nano editor (in case you prefer not to work with the VI editor that is part of the minimal Linux system).
+
+# Pay attention to syntax changes in newer versions: https://docs.yoctoproject.org/next/migration-guides/migration-3.4.html
+
+
+# Make Kernel Changes Permanent
+
+bitbake -c savedefconfig virtual/kernel
+
+Now rebuild the Linux system and flash it to an SD Card. If all went well, you can now use GCC and the Nano editor natively on the STM32MP157F-DK2 board.
+
+# If apt commands give an error like this	E: flAbsPath on /var/lib/dpkg/status failed ; run the following
+	touch /var/lib/dpkg/status
+
+	
+sudo picocom -b 115200 /dev/ttyACM1
+# If you wish to exit picocom, press [Ctrl][a] followed by [Ctrl][x]
+
+# nano /etc/apt/sources.list.d/sources.list
+
+deb [trusted=yes] http://packages.openstlinux.st.com kirkstone InRelease
+deb [trusted=yes] http://packages.openstlinux.st.com kirkstone/main armhf Packages
+deb [trusted=yes] http://packages.openstlinux.st.com kirkstone/updates armhf Packages
+
+# nano /etc/apt/apt.conf
+
+APT::Architecture "${DPKG_ARCH}";
+
+##
+git diff --no-index stm32mp157f-dk2.dts.orig stm32mp157f-dk2.dts > 0001-add-i2c5-userspace-dts.patch
