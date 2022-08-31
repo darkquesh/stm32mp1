@@ -113,7 +113,7 @@ https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
 `Terminal2 $> ip link set can0 up type can bitrate 1000000 dbitrate 2000000 fd on loopback on`  
 `Terminal2 $> ip  -details link show can0`
 
-#### Make sure the CAN link is up
+#### Make sure that the CAN link is up
 
 `Terminal2 $> candump can0 -L &`  
 `Terminal2 $> for counter in {1..20000}; do cansend can0 300#AC.AB.AD.AE.75.49.AD.D1; done`
