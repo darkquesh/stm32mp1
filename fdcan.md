@@ -1,8 +1,8 @@
 # How to set FDCAN on STM32MP157F-DK2 #
 
 ############ TUTORIALS ###########
-# 1. https://wiki.st.com/stm32mpu/wiki/How_to_set_up_a_SocketCAN_interface
-# 2. https://wiki.st.com/stm32mpu/wiki/How_to_send_or_receive_CAN_data
+1. https://wiki.st.com/stm32mpu/wiki/How_to_set_up_a_SocketCAN_interface
+2. https://wiki.st.com/stm32mpu/wiki/How_to_send_or_receive_CAN_data
 ##################################
 
 ######### TROUBLESHOOTING ##################
