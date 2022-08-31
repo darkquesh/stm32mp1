@@ -1,19 +1,20 @@
-# How to set FDCAN on STM32MP157F-DK2 #
+# How to set FDCAN on STM32MP157F-DK2
 
-############ TUTORIALS ###########
+## TUTORIALS
 1. https://wiki.st.com/stm32mpu/wiki/How_to_set_up_a_SocketCAN_interface
 2. https://wiki.st.com/stm32mpu/wiki/How_to_send_or_receive_CAN_data
-##################################
 
-######### TROUBLESHOOTING ##################
-# If ip link/iplink gives an error like 
-# 	ip: either "dev" is duplicate, or "type" is garbage 
-cd ../build-mp1
-bitbake -c menuconfig busybox
-# Under Networking Utilities enable iproute
-# And check these websites: http://www.armadeus.org/wiki/index.php?title=CAN_bus_Linux_driver https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
-############################################
+## TROUBLESHOOTING
+### If ip link/iplink gives an error like  
+> ip: either "dev" is duplicate, or "type" is garbage
 
+	cd ../build-mp1  
+	bitbake -c menuconfig busybox 
+### Under Networking Utilities enable ***iproute** and check these websites: 
+http://www.armadeus.org/wiki/index.php?title=CAN_bus_Linux_driver  
+https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus  
+  
+  
 ## 0. Activate CAN driver in kernel configuration (enabled by default)
 
 cd ~/Projects/yocto/build-mp1
