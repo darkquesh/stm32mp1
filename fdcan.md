@@ -27,7 +27,8 @@ https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <\*> Bosch M_CAN support  
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <\*> Bosch M_CAN support for io-mapped devices  
   
-  
+<br>
+
 ### 1. First, install the required stuff
 
 `cd ~/Projects/yocto/build-mp1/conf`  
@@ -38,12 +39,14 @@ https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
 	IMAGE_INSTALL:append = " can-utils"  
 #### Rebuild the image, flash it onto an SD card and boot the system  
   
+<br>
   
 ### 2. Check the available CAN devices  
 
 `ls /sys/class/net`  
 `ifconfig -a`  
   
+<br>
   
 ### 3. Configure the available SocketCAN interface  
   
@@ -53,7 +56,8 @@ https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
 
 `ip -details link show can0`  
   
-  
+<br>
+
 ### 4. Enable the CAN interface and check whether it is up  
   
 `ip link set can0 up`
@@ -63,7 +67,8 @@ https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
   
 `ip link set can0 down`  
     
-  
+<br>
+
 ### 5. Hardware self-test / Loopback test mode; configure and enable in the same command line  
   
 `ip link set can0 up type can bitrate 1000000 dbitrate 2000000 fd on loopback on`
@@ -87,17 +92,20 @@ https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
 	EXTRA_IMAGE_FEATURES ?= "debug-tweaks"
 	EXTRA_IMAGE_FEATURES += "ssh-server-openssh"  
   
-  
+<br>
+
 ### 2. Get the IP address of your board  
 
 `Board $> ip addr show`  
   
-  
+<br>
+
 ### 3. Connect to your board over Ethernet
 
 `PC $> ssh root@<board-ip-address>`  
   
-  
+<br>
+
 ### 4. Ping and test CAN data in two different terminals we set up  
 
 `Terminal1 $> ping www.google.com`  
