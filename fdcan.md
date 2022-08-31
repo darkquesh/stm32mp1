@@ -60,7 +60,7 @@ https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
 
 ### 4. Enable the CAN interface and check whether it is up  
   
-`ip link set can0 up`
+`ip link set can0 up`  
 `ip -details link show can0`  
   
 #### To disable CAN, run  
@@ -71,12 +71,12 @@ https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
 
 ### 5. Hardware self-test / Loopback test mode; configure and enable in the same command line  
   
-`ip link set can0 up type can bitrate 1000000 dbitrate 2000000 fd on loopback on`
+`ip link set can0 up type can bitrate 1000000 dbitrate 2000000 fd on loopback on`  
 `ip  -details link show can0`  
 
 #### Send and receive message in internal loopback mode  
 
-`candump can0 -L &`
+`candump can0 -L &`  
 `cansend can0 300#AC.AB.AD.AE.75.49.AD.D1`  
   
   
