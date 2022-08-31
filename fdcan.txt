@@ -14,7 +14,7 @@ bitbake -c menuconfig busybox
 # And check these websites: http://www.armadeus.org/wiki/index.php?title=CAN_bus_Linux_driver https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
 ############################################
 
-## Activate CAN driver in kernel configuration
+## 0. Activate CAN driver in kernel configuration (enabled by default)
 
 cd ~/Projects/yocto/build-mp1
 bitbake -c menuconfig virtual/kernel
