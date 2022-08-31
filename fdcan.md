@@ -14,7 +14,8 @@
 http://www.armadeus.org/wiki/index.php?title=CAN_bus_Linux_driver  
 https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus  
   
-  
+<br>
+
 ### 0. Activate CAN driver in kernel configuration (enabled by default)
 
 `cd ~/Projects/yocto/build-mp1`
@@ -75,8 +76,8 @@ https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
   
   
   
-  
-  
+<br>
+
 ## Ping over Ethernet and send/receive CAN message simultaneously  
 
 ### 1. We have been already using the board's terminal on serial port; however we need to set up ssh for also using the terminal over Ethernet. To do so, add the following line to local.conf  
