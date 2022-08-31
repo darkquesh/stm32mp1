@@ -103,4 +103,4 @@ Terminal2 $> ip  -details link show can0
 Terminal2 $> candump can0 -L &
 Terminal2 $> for counter in {1..20000}; do cansend can0 300#AC.AB.AD.AE.75.49.AD.D1; done
 
-![Interfacing CAN and Ethernet simultaneously]([https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true](https://github.com/darkquesh/stm32mp1/blob/main/images/stm32mp1_ethernet_and_can.png))
+![Interfacing CAN and Ethernet simultaneously](https://github.com/darkquesh/stm32mp1/blob/main/images/stm32mp1_ethernet_and_can.png)
