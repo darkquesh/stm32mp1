@@ -18,7 +18,7 @@ https://developer.ridgerun.com/wiki/index.php/How_to_configure_and_use_CAN_bus
 
 ### 0. Activate CAN driver in kernel configuration (enabled by default)
 
-`cd ~/Projects/yocto/build-mp1`
+`cd ~/Projects/yocto/build-mp1`  
 `bitbake -c menuconfig virtual/kernel`
 
 > [\*] Networking support --->  
