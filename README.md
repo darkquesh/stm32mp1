@@ -18,7 +18,7 @@ This guide includes
 
 ### I highly recommend you to refer to the [tutorial I have written in PDF format](https://github.com/darkquesh/stm32mp1/blob/main/Yocto_STM32MP157F-DK2_Linux_Image.pdf) for every essential information to begin your journey into Embedded Linux on your STM32MP157x board.  
 
-Although a bit outdated, the Digikey's tutorial on STM32MP1 board is also quite useful: [Introduction to Embedded Linux | Digikey](https://www.youtube.com/playlist?list=PLEBQazB0HUyTpoJoZecRK6PpDG31Y7RPB)  
+Although a bit outdated, the Digikey's tutorial on STM32MP1 board is also quite useful (which mine is based on): [Introduction to Embedded Linux | Digikey](https://www.youtube.com/playlist?list=PLEBQazB0HUyTpoJoZecRK6PpDG31Y7RPB)  
   
 
 
