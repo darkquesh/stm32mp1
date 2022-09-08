@@ -1,9 +1,26 @@
 # Development on STM32MP157F-DK2 board  
 
+A general-purpose microprocessor portfolio enabling easy development for a broad range of applications, the [STM32MP1 series][1] is based on a heterogeneous single or dual Arm Cortex-A7 and Cortex-M4 cores architecture, strengthening its ability to support multiple and flexible applications. The Cortex-A7 core provides access to open-source operating systems (Linux/Android) while the Cortex-M4 core leverages the STM32 MCU ecosystem.
+
+STM32MP157-DK2 discovery kit includes a touchscreen and also embeds up to 37 communication peripherals including 10/100M or Gigabit Ethernet, 3x USB 2.0 Host/OTG, 29x Timers and Advanced Analog.
+
+![STM32MP157F-DK2 hardware](https://github.com/darkquesh/stm32mp1/blob/main/images/STM32MP157F-DK2_board.png)
+
 This guide includes  
 - How to set up Linux environment on your host computer  
 - Build your own Linux image  
 - Configure the kernel  
 - Add layers and custom recipes to Linux image  
 - Customise device tree and apply patches for peripherals including I2C and CAN-FD  
-- Communicate over Ethernet and FDCAN on your board
+- Communicate over Ethernet and FDCAN simultaneously on your board
+
+<br>
+
+I highly recommend you to refer to the [tutorial I have written in PDF format](https://github.com/darkquesh/stm32mp1/blob/main/Yocto_STM32MP157F-DK2_Linux_Image.pdf) for every essential information to begin your journey into Embedded Linux on your STM32MP157x board.  
+
+Although a bit outdated, the Digikey's tutorial on STM32MP1 board is also quite useful: [Introduction to Embedded Linux | Digikey](https://www.youtube.com/playlist?list=PLEBQazB0HUyTpoJoZecRK6PpDG31Y7RPB)  
+  
+
+
+
+[1]: <https://www.st.com/en/microcontrollers-microprocessors/stm32mp1-series.html> "STM32MP1"
