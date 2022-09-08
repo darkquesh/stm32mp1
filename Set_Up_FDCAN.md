@@ -1,5 +1,4 @@
-# How to set up FDCAN on STM32MP157F-DK2
-# and communicate over Ethernet simultaneously
+# How to set up FDCAN on STM32MP157F-DK2 and communicate over Ethernet simultaneously
 
 ## TUTORIALS
 1. https://wiki.st.com/stm32mpu/wiki/How_to_set_up_a_SocketCAN_interface
