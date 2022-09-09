@@ -20,7 +20,10 @@ This guide includes
 
 Although a bit outdated, the Digikey's tutorial on STM32MP1 board is also quite useful (which mine is based on): [Introduction to Embedded Linux | Digikey](https://www.youtube.com/playlist?list=PLEBQazB0HUyTpoJoZecRK6PpDG31Y7RPB)  
   
+<br>
 
+## Device Tree Usage
+https://elinux.org/Device_Tree_Usage
 
 
 [1]: <https://www.st.com/en/microcontrollers-microprocessors/stm32mp1-series.html> "STM32MP1"
