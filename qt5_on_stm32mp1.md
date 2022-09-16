@@ -1,12 +1,13 @@
-### Download the layer for Qt5
+### Download the layer for Qt5  
+    cd ~/Projects/yocto
+    git clone https://github.com/meta-qt5/meta-qt5  
+    cd meta-qt5  
+    git checkout kirkstone  
+<br>
 
-`cd ~/Projects/yocto`  
-`git clone https://github.com/meta-qt5/meta-qt5`  
-`cd meta-qt5`  
-`git checkout kirkstone`  
-
-cd ~/Projects/yocto/build-mp1
-gedit conf/bblayers.conf
+### Then, edit the layer config file  
+    cd ~/Projects/yocto/build-mp1  
+    gedit conf/bblayers.conf
 
 ### Change BBLAYERS with the following
 >BBLAYERS ?= " \
@@ -22,4 +23,4 @@ gedit conf/bblayers.conf
 
 ### save and exit, and run:
 
-`bitbake meta-toolchain-qt5`
+    bitbake meta-toolchain-qt5
