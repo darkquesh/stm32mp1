@@ -1,0 +1,25 @@
+### Download the layer for Qt5
+
+`cd ~/Projects/yocto`  
+`git clone https://github.com/meta-qt5/meta-qt5`  
+`cd meta-qt5`  
+`git checkout kirkstone`  
+
+cd ~/Projects/yocto/build-mp1
+gedit conf/bblayers.conf
+
+### Change BBLAYERS with the following
+>BBLAYERS ?= " \
+>  /home/dell/Projects/yocto/poky/meta \\  
+>  /home/dell/Projects/yocto/poky/meta-poky \\  
+>  /home/dell/Projects/yocto/poky/meta-yocto-bsp \\  
+>  /home/dell/Projects/yocto/meta-openembedded/meta-oe \\  
+>  /home/dell/Projects/yocto/meta-openembedded/meta-python \\  
+>  /home/dell/Projects/yocto/meta-st-stm32mp \\  
+>  /home/dell/Projects/yocto/meta-custom \\  
+>  /home/dell/Projects/yocto/meta-qt5 \\    
+>  "
+
+### save and exit, and run:
+
+`bitbake meta-toolchain-qt5`
