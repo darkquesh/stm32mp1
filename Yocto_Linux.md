@@ -19,23 +19,23 @@
    - 2.2 Flashing the Image to SD Card
 - 3 [Testing the Image](Testing-the-Image)
    - 3.1 Boot into Linux
-- 4 [Adding Build Tools](Adding-Build-Tools)
+- 4 [Adding Build Tools](#Adding-Build-Tools)
 - 5 [Creating Custom Layer and Image](Creating-Custom-Layer-and-Image)
    - 5.1 Default Image Recipes
    - 5.2 Create Custom Layer
    - 5.3 Create Custom Image
    - 5.4 Add Layer to Build Process
-- 6 [Device Tree Patches](Device-Tree-Patches)
+- 6 [Device Tree Patches](#Device-Tree-Patches)
    - 6.1 Create Device Tree Patch
    - 6.2 Enable I<sup>2</sup>C and FDCAN
    - 6.3 Applying Patch to Device Tree
    - 6.4 Enable i2cdetect and can-utils
-- 7 [Building Custom Image](Building-Custom-Image)
+- 7 [Building Custom Image](#Building-Custom-Image)
    - 7.1 Build and Flash the Custom Image
    - 7.2 Testing I<sup>2</sup>C and FDCAN
       - 7.2.1 I<sup>2</sup>C Tools and Sensor Connection
       - 7.2.2 FDCAN Initialisation and Loopback Test
-- [Further Reading and Resources](Further-Reading-and-Resources)
+- [Further Reading and Resources](#Further-Reading-and-Resources)
 
 
 # Creating a Custom Linux Image
