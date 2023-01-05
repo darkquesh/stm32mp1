@@ -193,6 +193,8 @@ Now that your build system is set up, you can make changes to the kernel. To do 
 bitbake -c menuconfig virtual/kernel
 ```
 Note that the first time you run bitbake for a particular build, it will take some time parsing all the required metadata. This could take 15 minutes or more, depending on your host computer, so be patient. After it finishes, you should be presented with a menu.
+  
+![virtual_kernel_menuconfig](https://user-images.githubusercontent.com/56772428/210803513-627ec975-6ef5-47b2-8b78-0e8b14f73f58.jpeg)
 
   
 You can change various kernel settings. However, we will leave everything at their defaults for now, so just select Exit and press ’enter’.
@@ -262,9 +264,10 @@ From here, you can figure out which image files ST would use to flash an SD card
 
 ```
 gedit flashlayout_core-image-minimal/trusted/FlashLayout_sdcard_stm32mp157f-dkc2-trusted.tsv
-```
+```  
+   
+  ![flash_partitions](https://user-images.githubusercontent.com/56772428/210804263-d1e07e10-f960-4431-8c37-66f9bdf30e8d.jpeg)
   
-
 This will show you the name of the image files to use for the FSBL, metadata, SSBL, bootfs, vendorfs, rootfs and userfs.
 
 To flash the final image, plug your SD card into your host computer and check where it is mounted. We can use `sudo fdisk -l` or `lsblk` command for that.
@@ -275,8 +278,10 @@ Make sure to unmount any partitions that were automounted when you plugged in th
 As we will be writing to the SD card, any previous data and partitions should be formatted. To do that run this line:
 
 ```
-sudo fdisk /dev/mmcblk
+sudo fdisk /dev/mmcblk0
 ```
+  
+   ![fdisk_partitions](https://user-images.githubusercontent.com/56772428/210804362-575f914b-c791-4715-bba4-45dfa29ae90e.jpeg)
 
    
 In fdisk, perform the following actions:
@@ -298,6 +303,9 @@ Now we can flash the SD card:
 ```
 sudo dd if =../flashlayout_core-image-minimal/extensible/../../FlashLayout_sdcard_stm32mp157f-dk2-extensible.raw of=/dev/mmcblk0 bs=8M conv=fdatasync status=progress oflag=direct
 ```
+   
+   ![partitions_script](https://user-images.githubusercontent.com/56772428/210804435-2c17f96e-ec67-4cf3-a7e0-8f4d26922a5d.jpeg)
+
 
 # Testing the Image
 
@@ -314,6 +322,8 @@ sudo picocom -b 115200 /dev/ttyACM
 
 If everything went well, you should see the FSBL (TF-A) post a few lines to the console followed by the SSBL (U-Boot). U-Boot will launch the kernel, and after a few seconds, you should be presented with a login prompt. Enter "root" (no password) to gain access to Linux.
   
+   ![picocom](https://user-images.githubusercontent.com/56772428/210804509-26b23067-5228-4e57-91a2-7ede521da66a.png)
+
 
 ## Adding Build Tools
 
@@ -325,6 +335,9 @@ First, navigate to this directory and edit _local.conf_ :
 cd ~/Projects/yocto/build-mp1/conf
 gedit local.conf
 ```
+   
+   ![local conf-add-build](https://user-images.githubusercontent.com/56772428/210804621-232d4386-0872-4b42-9a04-8e009453bb70.jpeg)
+
   
 Add the following lines:
 
@@ -358,6 +371,8 @@ Look at the core-image-minimal recipe to see what was being included in our prev
 ```
 gedit recipes-core/images/core-image-minimal.bb
 ```
+  
+   ![bbclass1](https://user-images.githubusercontent.com/56772428/210804790-999b2816-eb39-480a-9191-0c9a860de8d3.jpeg)
   
    
 ### 5.2 Create Custom Layer
@@ -409,6 +424,8 @@ gedit conf/bblayers.conf
 ```
 Add "/home/<username>/Projects/yocto/meta-custom \" to the BBLAYERS variable.
   
+   ![custom-layer1](https://user-images.githubusercontent.com/56772428/210804908-446334a7-c1b2-4a79-9fa7-69b87c5777bc.jpeg)
+  
 Next, we are going to include some features to our custom image.
 
 ```
@@ -416,6 +433,8 @@ cd ../build-mp1/
 gedit conf/local.conf
 ```
   
+   ![extra_image_features](https://user-images.githubusercontent.com/56772428/210805012-3cde2e21-767a-42e7-b1fa-167fb18df6bd.jpeg)
+   
 Make sure that _debug-tweaks_ is enabled and append this line to the configuration file:
 
 `EXTRA_IMAGE_FEATURES += "hwcodecs tools-sdk tools-debug splash ssh-server-openssh
@@ -423,17 +442,21 @@ package-management"`
 
 You can view the IMAGE_FEATURES variable with the following command:
   
+   ![image_features](https://user-images.githubusercontent.com/56772428/210805075-5cb1e491-45e5-4599-b172-abf69c2759ee.jpeg)
+  
 Moreover, you can check out other image features here:https://docs.yoctoproject.org/ref-manual/features.html?highlight=extra_image_features.
 
 
 # Device Tree Patches
 
-If you look at the datasheet for the STM32MP157D-DK1 development board, you can see that there are 6 I2C busses available. By default I2C ports 1 and 4 are enabled and used to control other components on the board. We want to enable port 5 (as it is broken out to the Raspberry Pi-style header on the board) and use it to communicate with a temperature sensor. SDA is on top header (CN2) pin 3 and SCL is on pin 5.
+If you look at the [datasheet for the STM32MP157D-DK1 development board](https://www.st.com/resource/en/user_manual/um2637-discovery-kits-with-increasedfrequency-800-mhz-stm32mp157-mpus-stmicroelectronics.pdf), you can see that there are 6 I2C busses available. By default I2C ports 1 and 4 are enabled and used to control other components on the board. We want to enable port 5 (as it is broken out to the Raspberry Pi-style header on the board) and use it to communicate with a temperature sensor. SDA is on top header (CN2) pin 3 and SCL is on pin 5.
 
-  
-If you look at the STM32MP157 reference manual, you can see that I2C port 5 is controlled by registers starting at memory address 0x40015000.
-  
+   ![pinout](https://user-images.githubusercontent.com/56772428/210805368-92ff97f3-80d1-4210-91a2-31acef2a7967.jpeg)
    
+If you look at the [STM32MP157 reference manual](https://www.st.com/resource/en/reference_manual/dm00327659-stm32mp157-advanced-arm-based-32-bit-mpus-stmicroelectronics.pdf), you can see that I2C port 5 is controlled by registers starting at memory address 0x40015000.
+  
+   ![i2c5_memory](https://user-images.githubusercontent.com/56772428/210805430-04ff75eb-41db-4f42-abf8-a651daa3bde1.jpeg)
+  
 ### 6.1 Create Device Tree Patch
 
 On your host computer, navigate to the build directory and copy the device tree source (.dts) file to a temporary working directory. Then, create a copy of the original. Open it to make changes. Feel free to look through this guide to learn more about device trees.
@@ -470,7 +493,9 @@ pinctrl-1 = <&m_can1_sleep_pins_a>;
 status = "okay";
 };
 ```
-  
+   
+   ![device-tree-patch](https://user-images.githubusercontent.com/56772428/210805527-ede657db-4d4e-4140-a80e-999583c505cf.jpeg)
+    
 Save and exit. Then, create a diff patch. Note the "–no-index" argument allows us to perform `git diff` on two different files that are not part of a git repository.
 
 ```
@@ -488,7 +513,8 @@ Change the file header so that it points to the correct file locations:
 --- a/arch/arm/boot/dts/stm32mp157f-dk2.dts
 +++ b/arch/arm/boot/dts/stm32mp157f-dk2.dts
 ```
-  
+   
+  ![patch_file](https://user-images.githubusercontent.com/56772428/210805625-316d400b-fa19-4234-a7f3-b429f289f9b6.jpeg)
    
 ### 6.3 Applying Patch to Device Tree
 
@@ -528,6 +554,8 @@ FILESEXTRAPATHS_prepend := "${THISDIR}:"
 SRC_URI += "file://0001-add-i2c5-userspace-dts.patch"
 ```
   
+   ![append_patch](https://user-images.githubusercontent.com/56772428/210805734-a9e79d19-1fb1-43d2-8e03-f3b52d9a7ea4.jpeg)
+
    
 ### 6.4 Enable i2cdetect and can-utils
 
@@ -546,6 +574,11 @@ IMAGE_INSTALL:append = " curl"
 IMAGE_INSTALL:append = " gnupg"
 ```
    
+Your final _local.conf_ file should look like this  
+   
+   ![can-utils](https://user-images.githubusercontent.com/56772428/210805901-d5676a82-b210-4cf1-a994-54a910d31620.jpeg)
+
+   
 To test a I<sup>2</sup>C sensor, we want to probe it on the I2C bus. The easiest way to do that is with the i2cdetect tool, which comes with busybox. However, it is not enabled by default for our image, so we need to enable it.
 
 Navigate to the build folder and bring up the busybox menuconfig screen:
@@ -555,6 +588,8 @@ cd ../build-mp1
 bitbake -c menuconfig busybox
 ```
 In there, head to _Miscellaneous Utilities_ , highlight i2cdetect and the other i2c utilities, and press Y to enable. It should have an asterisk [∗] in the select box to denote that the tools will be included with busybox in the next build.
+  
+   ![busybox](https://user-images.githubusercontent.com/56772428/210805965-ec34a8e1-0314-4a16-8447-85044d0566a7.jpeg)
   
 Select Exit with the arrow keys and press ’enter’ to leave that screen. Do that again to exit menuconfig. Save the configuration when asked.
 
@@ -592,6 +627,9 @@ Log in to the board with "root" and run the following command line:
 ```
 ls -l /sys/bus/i2c/devices
 ```
+   
+   ![i2cdetect_test](https://user-images.githubusercontent.com/56772428/210806040-7f41f0f0-19ac-4ced-860d-37ab3042a6ad.jpeg)
+
   
 This should show you which device files (in /dev/) are symbolically linked to i2c ports/drivers on the main processor. In my case, /dev/i2c-1 is linked to I2C-5 (address 0x40015000), which is the port we just enabled.
 
@@ -601,7 +639,10 @@ that the bus number (1) should match the device file number.
 ```
 i2cdetect -y 1
 ```
-  
+   
+   ![i2cdetect2](https://user-images.githubusercontent.com/56772428/210806107-4877bd9f-fcfb-4ce5-8226-821b5ebf81fa.jpeg)
+    
+   
 If all goes well, you should see 0x33 being reported on the bus, which means you can communicate with the MLX90640!
 
 #### 7.2.2 FDCAN Initialisation and Loopback Test
@@ -613,17 +654,12 @@ To communicate with the CAN-FD bus on your STM32MP157F-DK2 board, you can refer 
 ## Further Reading and Resources
 
 
-[1] STM32MP15 Discovery kits - getting started, STMicroelectronics Wiki
-https://wiki.st.com/stm32mpu/wiki/STM32MP15_Discovery_kits_-_getting_started
+[1] STM32MP15 Discovery kits - getting started, STMicroelectronics Wiki, https://wiki.st.com/stm32mpu/wiki/STM32MP15_Discovery_kits_-_getting_started
   
-[2] STM32MP157F-DK2 User Manual, STMicroelectronics ,
-https://www.st.com/resource/en/user_manual/um2637-discovery-kits-with-increasedfrequency-800-mhz-stm32mp157-mpus-stmicroelectronics.pdf
+[2] STM32MP157F-DK2 User Manual, STMicroelectronics, https://www.st.com/resource/en/user_manual/um2637-discovery-kits-with-increasedfrequency-800-mhz-stm32mp157-mpus-stmicroelectronics.pdf
   
-[3] STM32MP157F-DK2 Reference Manual, STMicroelectronics ,
-https://www.st.com/resource/en/reference_manual/dm00327659-stm32mp157-advanced-arm-based-32-bit-mpus-stmicroelectronics.pdf
+[3] STM32MP157F-DK2 Reference Manual, STMicroelectronics, https://www.st.com/resource/en/reference_manual/dm00327659-stm32mp157-advanced-arm-based-32-bit-mpus-stmicroelectronics.pdf
   
-[4] Yocto Project Reference Manual, Linux Foundation and Yocto Project ,
-https://docs.yoctoproject.org/ref-manual/index.html
+[4] Yocto Project Reference Manual, Linux Foundation and Yocto Project, https://docs.yoctoproject.org/ref-manual/index.html
   
-[5] Github,https://github.com/darkquesh/stm32mp1
-
+[5] Github, https://github.com/darkquesh/stm32mp1
