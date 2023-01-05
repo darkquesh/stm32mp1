@@ -17,10 +17,10 @@
 - 2 [Final Image for SD Card](#Final-Image-for-SD-Card)
    - 2.1 Creating the Final Image
    - 2.2 Flashing the Image to SD Card
-- 3 [Testing the Image](Testing-the-Image)
+- 3 [Testing the Image](#Testing-the-Image)
    - 3.1 Boot into Linux
 - 4 [Adding Build Tools](#Adding-Build-Tools)
-- 5 [Creating Custom Layer and Image](Creating-Custom-Layer-and-Image)
+- 5 [Creating Custom Layer and Image](#Creating-Custom-Layer-and-Image)
    - 5.1 Default Image Recipes
    - 5.2 Create Custom Layer
    - 5.3 Create Custom Image
