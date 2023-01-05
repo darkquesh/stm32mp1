@@ -1,6 +1,6 @@
 # Development on STM32MP157F-DK2 board  
 
-### [Jump to tutorial](https://github.com/darkquesh/stm32mp1/blob/main/Yocto_Linux.md)
+### *[Jump to tutorial](https://github.com/darkquesh/stm32mp1/blob/main/Yocto_Linux.md)*
 
 A general-purpose microprocessor portfolio enabling easy development for a broad range of applications, the [STM32MP1 series][1] is based on an Arm Cortex-A7 and Cortex-M4 cores architecture. The Cortex-A7 core provides access to open-source operating systems (Linux/Android) while the Cortex-M4 core leverages the STM32 MCU ecosystem.
 
