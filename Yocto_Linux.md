@@ -184,6 +184,7 @@ Change the MACHINE variable to the following (comment out the "qemu" emulator an
 #MACHINE ??= “qemux86-64”
 MACHINE = “stm32mp1”
 ```
+  
 ### 1.4 Configure Kernel
 
 Now that your build system is set up, you can make changes to the kernel. To do that, enter:
@@ -191,12 +192,9 @@ Now that your build system is set up, you can make changes to the kernel. To do 
 ```
 bitbake -c menuconfig virtual/kernel
 ```
-Note that the first time you run bitbake for a particular build, it will take some time parsing all the required metadata. This could take 15 minutes or more, depending on your host computer, so be patient. After it finishes, you should be presented with a menu:
+Note that the first time you run bitbake for a particular build, it will take some time parsing all the required metadata. This could take 15 minutes or more, depending on your host computer, so be patient. After it finishes, you should be presented with a menu.
 
-
-```
-Figure 1.1: Configuring the kernel
-```
+  
 You can change various kernel settings. However, we will leave everything at their defaults for now, so just select Exit and press ’enter’.
 
 To make kernel changes permanent whenever you modify the kernel, you should run:
@@ -204,6 +202,7 @@ To make kernel changes permanent whenever you modify the kernel, you should run:
 ```
 bitbake -c savedefconfig virtual/kernel
 ```
+     
 ### 1.5 Build Image
 
 Now, it is time to actually build your image! We need to choose an image to build from various images that are supported by the default poky installation here:https://docs.yoctoproject.org/ref-manual/images.html  
@@ -249,6 +248,7 @@ A _create_sdcard_from_flashlayout.sh_ script can be found in that folder. Let us
 ./create_sdcard_from_flashlayout.sh ../flashlayout_core-image-minimal/extensibc
 le/FlashLayout_sdcard_stm32mp157f-dk2-extensible.tsv
 ```
+   
 ### 2.2 Flashing the Image to SD Card
 
 ST recommends using their STM32CubeProgrammer to flash the SD card. However, we will do things manually so you can get an idea of how to configure an SD card with the various image files.
@@ -263,10 +263,8 @@ From here, you can figure out which image files ST would use to flash an SD card
 ```
 gedit flashlayout_core-image-minimal/trusted/FlashLayout_sdcard_stm32mp157f-dkc2-trusted.tsv
 ```
+  
 
-```
-Figure 2.1: Flashing the final image
-```
 This will show you the name of the image files to use for the FSBL, metadata, SSBL, bootfs, vendorfs, rootfs and userfs.
 
 To flash the final image, plug your SD card into your host computer and check where it is mounted. We can use `sudo fdisk -l` or `lsblk` command for that.
@@ -279,9 +277,8 @@ As we will be writing to the SD card, any previous data and partitions should be
 ```
 sudo fdisk /dev/mmcblk
 ```
-```
-Figure 2.2: Partitions shown in fdisk
-```
+
+   
 In fdisk, perform the following actions:
 
 
@@ -316,10 +313,7 @@ sudo picocom -b 115200 /dev/ttyACM
 `/ttyACM1` part might be different on your host PC, so you could also try `/ttyACM0`. If you wish to exit picocom, press [Ctrl][A] followed by [Ctrl][X].
 
 If everything went well, you should see the FSBL (TF-A) post a few lines to the console followed by the SSBL (U-Boot). U-Boot will launch the kernel, and after a few seconds, you should be presented with a login prompt. Enter "root" (no password) to gain access to Linux.
-
-```
-Figure 3.1: Successfully booted into Linux
-```
+  
 
 ## 4 Adding Build Tools
 
@@ -331,9 +325,7 @@ First, navigate to this directory and edit _local.conf_ :
 cd ~/Projects/yocto/build-mp1/conf
 gedit local.conf
 ```
-```
-Figure 4.1: Adding tools in local.conf
-```
+  
 Add the following lines:
 
 ```
@@ -416,30 +408,21 @@ cd ../build-mp1/
 gedit conf/bblayers.conf
 ```
 Add "/home/<username>/Projects/yocto/meta-custom \" to the BBLAYERS variable.
-
-```
-Figure 5.2: Adding custom layer
-```
+  
 Next, we are going to include some features to our custom image.
 
 ```
 cd ../build-mp1/
 gedit conf/local.conf
 ```
-```
-Figure 5.3: Extra image features
-```
-
+  
 Make sure that _debug-tweaks_ is enabled and append this line to the configuration file:
 
 `EXTRA_IMAGE_FEATURES += "hwcodecs tools-sdk tools-debug splash ssh-server-openssh
 package-management"`
 
 You can view the IMAGE_FEATURES variable with the following command:
-
-```
-Figure 5.4: Showing which features are enabled
-```
+  
 Moreover, you can check out other image features here:https://docs.yoctoproject.org/ref-manual/features.html?highlight=extra_image_features.
 
 
@@ -447,15 +430,10 @@ Moreover, you can check out other image features here:https://docs.yoctoproject.
 
 If you look at the datasheet for the STM32MP157D-DK1 development board, you can see that there are 6 I2C busses available. By default I2C ports 1 and 4 are enabled and used to control other components on the board. We want to enable port 5 (as it is broken out to the Raspberry Pi-style header on the board) and use it to communicate with a temperature sensor. SDA is on top header (CN2) pin 3 and SCL is on pin 5.
 
-```
-Figure 6.1: STM32MP157F-DK2 CN2 GPIO header pinout
-```
+  
 If you look at the STM32MP157 reference manual, you can see that I2C port 5 is controlled by registers starting at memory address 0x40015000.
-
-
-```
-Figure 6.2: Memory addressing of I2C5 peripheral
-```
+  
+   
 ### 6.1 Create Device Tree Patch
 
 On your host computer, navigate to the build directory and copy the device tree source (.dts) file to a temporary working directory. Then, create a copy of the original. Open it to make changes. Feel free to look through this guide to learn more about device trees.
@@ -492,9 +470,7 @@ pinctrl-1 = <&m_can1_sleep_pins_a>;
 status = "okay";
 };
 ```
-```
-Figure 6.3: I2C5 and FDCAN1 device tree patch
-```
+  
 Save and exit. Then, create a diff patch. Note the "–no-index" argument allows us to perform `git diff` on two different files that are not part of a git repository.
 
 ```
@@ -512,9 +488,8 @@ Change the file header so that it points to the correct file locations:
 --- a/arch/arm/boot/dts/stm32mp157f-dk2.dts
 +++ b/arch/arm/boot/dts/stm32mp157f-dk2.dts
 ```
-```
-Figure 6.4: Patch file
-```
+  
+   
 ### 6.3 Applying Patch to Device Tree
 
 Enable our build environment and navigate to the custom layer we created earlier:
@@ -544,16 +519,16 @@ It should say "linux-stm32mp". In the linux/ directory, create a custom .bbappen
 
 ```
 gedit recipes-kernel/linux/linux-stm32mp_%.bbappend
-```
+```  
+   
 In this file, add the following lines, which tell the kernel recipe to look in "this directory" (the directory containing this .bbappend file) and apply the patch to the kernel.
 
 ```
 FILESEXTRAPATHS_prepend := "${THISDIR}:"
 SRC_URI += "file://0001-add-i2c5-userspace-dts.patch"
 ```
-```
-Figure 6.5: Custom .bbappend file
-```
+  
+   
 ### 6.4 Enable i2cdetect and can-utils
 
 In order to send and receive CAN data, we need the _can-utils_ package. First, navigate to the following directory:
@@ -569,7 +544,7 @@ Then, append these lines to the end of the file:
 IMAGE_INSTALL:append = " can-utils"
 IMAGE_INSTALL:append = " curl"
 IMAGE_INSTALL:append = " gnupg"
-  
+```
    
 To test a I<sup>2</sup>C sensor, we want to probe it on the I2C bus. The easiest way to do that is with the i2cdetect tool, which comes with busybox. However, it is not enabled by default for our image, so we need to enable it.
 
@@ -580,11 +555,7 @@ cd ../build-mp1
 bitbake -c menuconfig busybox
 ```
 In there, head to _Miscellaneous Utilities_ , highlight i2cdetect and the other i2c utilities, and press Y to enable. It should have an asterisk [∗] in the select box to denote that the tools will be included with busybox in the next build.
-
-
-```
-Figure 6.7: Busybox configuration
-```
+  
 Select Exit with the arrow keys and press ’enter’ to leave that screen. Do that again to exit menuconfig. Save the configuration when asked.
 
 
@@ -596,16 +567,13 @@ Build the custom image:
 
 ```
 bitbake custom-image
-```
+```  
+   
 When the build process is finished, flash the image onto the SD card as discussed previously.
-
+    
 ```
-cd ~/Projects/yocto/build-mp1/tmp/deploy/images/stm32mp1/scripts
-```
-```
-./create_sdcard_from_flashlayout.sh ../flashlayout_custom-image/extensible/FlashLayout_sdcard_stm32mp157f-dk2-extensible.tsv
-```
-```
+cd ~/Projects/yocto/build-mp1/tmp/deploy/images/stm32mp1/scripts  
+./create_sdcard_from_flashlayout.sh ../flashlayout_custom-image/extensible/FlashLayout_sdcard_stm32mp157f-dk2-extensible.tsv  
 sudo dd if =../flashlayout_custom-image/extensible/../../FlashLayout_sdcard_stm32mp157f-dk2-extensible.raw of=/dev/mmcblk0 bs=8M conv=fdatasync status=progress oflag=direct
 ```  
    
@@ -624,10 +592,7 @@ Log in to the board with "root" and run the following command line:
 ```
 ls -l /sys/bus/i2c/devices
 ```
-
-```
-Figure 7.1: i2cdetect list devices
-```
+  
 This should show you which device files (in /dev/) are symbolically linked to i2c ports/drivers on the main processor. In my case, /dev/i2c-1 is linked to I2C-5 (address 0x40015000), which is the port we just enabled.
 
 Assuming that we have connected Waveshare MLX90640 thermal imaging camera (0x33 address) to the I2C5 pins on the board, we should be able to run the following command. Note
@@ -646,23 +611,18 @@ To communicate with the CAN-FD bus on your STM32MP157F-DK2 board, you can refer 
 
 ## Further Reading and Resources
 
-```
+
 [1] STM32MP15 Discovery kits - getting started, STMicroelectronics Wiki
 https://wiki.st.com/stm32mpu/wiki/STM32MP15_Discovery_kits_-_getting_started
-```
-```
+  
 [2] STM32MP157F-DK2 User Manual, STMicroelectronics ,
 https://www.st.com/resource/en/user_manual/um2637-discovery-kits-with-increasedfrequency-800-mhz-stm32mp157-mpus-stmicroelectronics.pdf
-```
-```
+  
 [3] STM32MP157F-DK2 Reference Manual, STMicroelectronics ,
 https://www.st.com/resource/en/reference_manual/dm00327659-stm32mp157-advanced-arm-based-32-bit-mpus-stmicroelectronics.pdf
-```
-```
+  
 [4] Yocto Project Reference Manual, Linux Foundation and Yocto Project ,
 https://docs.yoctoproject.org/ref-manual/index.html
-```
-```
+  
 [5] Github,https://github.com/darkquesh/stm32mp1
-```
 
