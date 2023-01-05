@@ -426,7 +426,7 @@ You can view the IMAGE_FEATURES variable with the following command:
 Moreover, you can check out other image features here:https://docs.yoctoproject.org/ref-manual/features.html?highlight=extra_image_features.
 
 
-## Device Tree Patches
+# Device Tree Patches
 
 If you look at the datasheet for the STM32MP157D-DK1 development board, you can see that there are 6 I2C busses available. By default I2C ports 1 and 4 are enabled and used to control other components on the board. We want to enable port 5 (as it is broken out to the Raspberry Pi-style header on the board) and use it to communicate with a temperature sensor. SDA is on top header (CN2) pin 3 and SCL is on pin 5.
 
@@ -608,7 +608,8 @@ If all goes well, you should see 0x33 being reported on the bus, which means you
 
 To communicate with the CAN-FD bus on your STM32MP157F-DK2 board, you can refer to the following tutorial: https://github.com/darkquesh/stm32mp1/blob/main/fdcan.md
 
-
+  
+   
 ## Further Reading and Resources
 
 
