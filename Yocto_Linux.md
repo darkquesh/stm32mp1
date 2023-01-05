@@ -1,6 +1,6 @@
 # How to Use Yocto Project to Create a Custom Linux Image
 
-### STM32MP157F-DK2 Development Kit
+### STM32MP157F-DK2 Development Kit - Yocto kirkstone
 #### September 2022  
 
 ## Contents
