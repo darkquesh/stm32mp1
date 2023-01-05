@@ -1,19 +1,11 @@
-**How to Use Yocto Project to Create a**
-
-**Custom Linux Image**
+# How to Use Yocto Project to Create a Custom Linux Image
 
 ### STM32MP157F-DK2 Development Kit
-
-### darkquesh
-
-github.com/darkquesh
-
-#### September 2022
-
+#### September 2022  
 
 ## Contents
 
-- 1 Creating a Custom Linux Image
+- 1 [Creating a Custom Linux Image](#Creating-a-Custom-Linux-Image)
    - Tutorials
    - Required Hardware
    - Required Software
@@ -35,13 +27,13 @@ github.com/darkquesh
    - 5.4 Add Layer to Build Process
 - 6 Device Tree Patches
    - 6.1 Create Device Tree Patch
-   - 6.2 Enable I^2 C and FDCAN
+   - 6.2 Enable I<sup>2</sup>C and FDCAN
    - 6.3 Applying Patch to Device Tree
    - 6.4 Enable i2cdetect and can-utils
 - 7 Building Custom Image
    - 7.1 Build and Flash the Custom Image
-   - 7.2 Testing I^2 C and FDCAN
-      - 7.2.1 I^2 C Tools and Sensor Connection
+   - 7.2 Testing I<sup>2</sup>C and FDCAN
+      - 7.2.1 I<sup>2</sup>C Tools and Sensor Connection
       - 7.2.2 FDCAN Initialisation and Loopback Test
 - Further Reading and Resources
 
@@ -564,7 +556,7 @@ cp stm32mp157f-dk2.dts stm32mp157f-dk2.dts.orig
 gedit stm32mp157f-dk2.dts
 ```
 
-### 6.2 Enable I^2 C and FDCAN
+### 6.2 Enable I<sup>2</sup>C and FDCAN
 
 At the bottom of the file, add the following device tree nodes in order to enable I2C5 and FD-
 CAN1:
@@ -682,7 +674,7 @@ Your final _local.conf_ file should look like this
 ```
 Figure 6.6: Extra packages like can-utils added in local.conf
 ```
-To test a I^2 C sensor, we want to probe it on the I2C bus. The easiest way to do that is with the
+To test a I<sup>2</sup>C sensor, we want to probe it on the I2C bus. The easiest way to do that is with the
 i2cdetect tool, which comes with busybox. However, it is not enabled by default for our image,
 so we need to enable it.
 
@@ -727,9 +719,9 @@ sudo dd if =../flashlayout_custom-image/extensible/../../FlashLayout_sdcard_stm3
 2mp157f-dk2-extensible.raw of=/dev/mmcblk0 bs=8M conv=fdatasync status=progress
 oflag=direct
 ```
-### 7.2 Testing I^2 C and FDCAN
+### 7.2 Testing I<sup>2</sup>C and FDCAN
 
-#### 7.2.1 I^2 C Tools and Sensor Connection
+#### 7.2.1 I<sup>2</sup>C Tools and Sensor Connection
 
 Plug the SD card into your STM32MP157F-DK2 and boot it up. Connect to the serial terminal
 with the following (you may need to change ttyACM1 to some other device file):
