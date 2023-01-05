@@ -315,7 +315,7 @@ sudo picocom -b 115200 /dev/ttyACM
 If everything went well, you should see the FSBL (TF-A) post a few lines to the console followed by the SSBL (U-Boot). U-Boot will launch the kernel, and after a few seconds, you should be presented with a login prompt. Enter "root" (no password) to gain access to Linux.
   
 
-## 4 Adding Build Tools
+## Adding Build Tools
 
 The core-image-minimal system is installed with minimal packages, as suggested by its name. Although it does not have any basic tools such as apt, gcc or nano package; we can add them by configuring our build.
 
