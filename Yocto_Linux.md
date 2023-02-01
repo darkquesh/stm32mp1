@@ -463,7 +463,7 @@ On your host computer, navigate to the build directory and copy the device tree 
 
 ```
 cd ~/Projects/yocto/build-mp1/
-cp tmp/work-shared/stm32mp1/kernel-source/arch/arm/boot/dts/stm32mp157d-dk1.dts
+cp tmp/work-shared/stm32mp1/kernel-source/arch/arm/boot/dts/stm32mp157f-dk2.dts
 ~/Documents
 cd ~/Documents
 cp stm32mp157f-dk2.dts stm32mp157f-dk2.dts.orig
