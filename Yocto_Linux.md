@@ -35,7 +35,7 @@
    - 7.2 Testing I<sup>2</sup>C and FDCAN
       - 7.2.1 I<sup>2</sup>C Tools and Sensor Connection
       - 7.2.2 FDCAN Initialisation and Loopback Test
-- [Further Reading and Resources](#Further-Reading-and-Resources)
+- [References](#References)
 
 
 # Creating a Custom Linux Image
@@ -650,7 +650,7 @@ To communicate with the CAN-FD bus on your STM32MP157F-DK2 board, you can refer 
 
   
    
-## Further Reading and Resources
+## References
 
 
 [1] STM32MP15 Discovery kits - getting started, STMicroelectronics Wiki, https://wiki.st.com/stm32mpu/wiki/STM32MP15_Discovery_kits_-_getting_started
