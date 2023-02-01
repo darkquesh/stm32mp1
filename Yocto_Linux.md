@@ -484,8 +484,7 @@ i2c-scl-falling-time-ns = <20>;
 clock-frequency = <100000>;
 status = "okay";
 };
-```
-```
+   
 &m_can1 {
 pinctrl-names = "default", "sleep";
 pinctrl-0 = <&m_can1_pins_a>;
