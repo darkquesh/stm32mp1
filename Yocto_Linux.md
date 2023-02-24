@@ -247,8 +247,7 @@ cd ~/Projects/yocto/build-mp1/tmp/deploy/images/stm32mp1/scripts
 A _create_sdcard_from_flashlayout.sh_ script can be found in that folder. Let us choose _FlashLayout_sdcard_stm32mp157f-dk2-extensible.tsv_ to create the image by executing this command line:
 
 ```
-./create_sdcard_from_flashlayout.sh ../flashlayout_core-image-minimal/extensibc
-le/FlashLayout_sdcard_stm32mp157f-dk2-extensible.tsv
+./create_sdcard_from_flashlayout.sh ../flashlayout_core-image-minimal/extensible/FlashLayout_sdcard_stm32mp157f-dk2-extensible.tsv
 ```
    
 ### 2.2 Flashing the Image to SD Card
