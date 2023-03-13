@@ -315,7 +315,7 @@ following:
 
 ```
 sudo apt install picocom
-sudo picocom -b 115200 /dev/ttyACM
+sudo picocom -b 115200 /dev/ttyACM1
 ```
 `/ttyACM1` part might be different on your host PC, so you could also try `/ttyACM0`. If you wish to exit picocom, press [Ctrl][A] followed by [Ctrl][X].
 
@@ -497,8 +497,7 @@ status = "okay";
 Save and exit. Then, create a diff patch. Note the "–no-index" argument allows us to perform `git diff` on two different files that are not part of a git repository.
 
 ```
-git diff --no-index stm32mp157f-dk2.dts.orig stm32mp157f-dk2.dts >
-0001-add-i2c5-userspace-dts.patch
+git diff --no-index stm32mp157f-dk2.dts.orig stm32mp157f-dk2.dts > 0001-add-i2c5-userspace-dts.patch
 ```
 However, because bitbake expects such diff files to be part of a repository, we need to make a couple of manual changes to the file so that it will be applied to the correct file (in a particular directory structure in the working area of build-mp1/tmp/). Open the file with:
 
