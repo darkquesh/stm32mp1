@@ -90,7 +90,7 @@ gedit ~/.bashrc
 Scroll to the bottom and add the following to a new line
 
 ```
-alias python=python
+alias python=python3
 ```
 Save and exit (’esc’ followed by entering ":wq"). Re-run the .bashrc script to update your shell:
 
