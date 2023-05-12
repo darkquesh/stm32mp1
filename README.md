@@ -20,13 +20,14 @@ This guide includes
 
 ### I highly recommend you to refer to the [tutorial I have written](https://github.com/darkquesh/stm32mp1/blob/main/Yocto_Linux.md) for every essential information to begin your journey into Embedded Linux on your STM32MP157x board (also in [PDF](https://github.com/darkquesh/stm32mp1/blob/main/Yocto_STM32MP157F-DK2_Linux_Image.pdf)). 
 
-### I would be appreciated if you let me know when you come across any typo or outdated information, thanks!
+#### I would be appreciated if you let me know when you come across any typo or outdated information, thanks!
 
 Although a bit outdated, the Digikey's tutorial on STM32MP1 board is also quite useful (which mine is based on): [Introduction to Embedded Linux | Digikey](https://www.youtube.com/playlist?list=PLEBQazB0HUyTpoJoZecRK6PpDG31Y7RPB)  
   
 <br>
 
-## Device Tree Usage
+## Extra Resources
+### Device tree usage
 https://elinux.org/Device_Tree_Usage
 
 
